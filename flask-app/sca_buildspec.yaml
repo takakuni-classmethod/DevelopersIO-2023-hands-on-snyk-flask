@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing SCA tool...
+      - npm install snyk@latest -g
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - echo Build started on `date`
+      - snyk auth <YOUR_SNYK_TOKEN>
+      - snyk test --file=requirements.txt --language=python
+      - echo Build completed on `date`

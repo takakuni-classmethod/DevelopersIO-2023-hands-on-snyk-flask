@@ -1,0 +1,13 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - echo Installing License Checker Tool...
+      - pip install liccheck
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Build completed on `date`
+      - liccheck -s license_strategy.ini -r requirements.txt

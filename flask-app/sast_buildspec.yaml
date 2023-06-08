@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing SAST tool...
+      - npm install snyk@latest -g
+      - echo Installing completed on `date`
+  build:
+    commands:
+      - echo Build started on `date`
+      - snyk auth <YOUR_SNYK_TOKEN>
+      - snyk code test
+      - echo Build completed on `date`

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    {% include "head.html" %}
+    <body>
+        <main>
+            {% include "navbar.html" %}
+            <div class="px-4 py-5 my-5 text-center text-lg-start">
+                <div class="col-lg-6 mx-auto">
+                    <h3 class="display-4 fw-bold lh-1 mb-3">Parameters</h3>
+                    <ul>
+                        <li>This web application is built using: <a href="https://flask.palletsprojects.com/en/2.0.x/" target="_blank">Flask Web Framework.</a></li>
+                        <li>For generating HTML, this web application uses: <a href="https://jinja.palletsprojects.com/en/3.0.x/" target="_blank">Jinja</a> Templating Engine.</li>
+                        <li>It uses <a href="https://www.sqlite.org/index.html" target="_blank">SQLite3</a> as the database.</li>
+                        <li>And uses <a href="https://www.sqlalchemy.org/" target="_blank">SQLAlchemy</a> as the Data Access Layer (ORM).</li>
+                        <li>There are two users that are pre-created for you.</li>
+                    </ul>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>badguy</td>
+                                <td>badguy</td>
+                                <td>The attacker</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>john</td>
+                                <td>&lt;unknown&gt;</td>
+                                <td>The victim</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+        </main>
+    </body>
+</html>

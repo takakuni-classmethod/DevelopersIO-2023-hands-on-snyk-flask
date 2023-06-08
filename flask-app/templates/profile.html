@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    {% include "head.html" %}
+    <body>
+        <main>
+            {% include "navbar.html" %}
+            <div class="px-4 py-5 my-5 text-center">
+                <h1 class="display-5 fw-bold">Profile</h1>
+                <div class="col-lg-6 mx-auto">
+                    <h3>Your username is: <b>{{ user.username }}</b></h3>
+                    <h3>Your email is: <b>{{ user.email }}</b></h3>
+                  </div>
+                </div>
+              </div>
+        </main>
+    </body>
+</html>

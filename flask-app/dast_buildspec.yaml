@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - |
+        echo "Deleting Alerts from last session"
+        curl -s "$ZAP_API_URL/JSON/alert/action/deleteAllAlerts/?apikey=$ZAP_API_KEY"
+        echo "Starting Active Scan for: $SCAN_URL"
+        curl -s "$ZAP_API_URL/JSON/core/action/accessUrl/?apikey=$ZAP_API_KEY&url=$SCAN_URL&followRedirects=false" > /dev/null
+        scanId=$(curl -s "$ZAP_API_URL/JSON/ascan/action/scan/?apikey=$ZAP_API_KEY&zapapiformat=JSON&formMethod=GET&url=$SCAN_URL&recurse=&inScopeOnly=false&scanPolicyName=&method=&postData=&contextId=" | jq -r '.scan')
+        echo "Waiting for results. OWASP Scan ID: $scanId"
+
+        while [ "$status" != "100" ];
+        do
+          status=$(curl -s "$ZAP_API_URL/JSON/ascan/view/status/?apikey=$ZAP_API_KEY&scanId=$scanId" | jq -r '.status')
+          echo "Scan Progress at $status%..."
+          sleep 3
+        done
+        echo "DONE!"
+  build:
+    commands:
+      - |
+        high_alerts=$(curl -s "$ZAP_API_URL/JSON/alert/view/alertsSummary/?apikey=$ZAP_API_KEY&baseurl=$SCAN_URL" | jq -r '.alertsSummary.High')
+        medium_alerts=$(curl -s "$ZAP_API_URL/JSON/alert/view/alertsSummary/?apikey=$ZAP_API_KEY&baseurl=$SCAN_URL" | jq -r '.alertsSummary.Medium')
+        
+        if [ $high_alerts -gt 0 ] || [ $medium_alerts -gt 0 ];
+        then
+          echo "There are $high_alerts High and $medium_alerts Medium Alerts. Failing Build..."
+          exit 1;
+        fi
+  post_build:
+    commands:
+      - |
+        echo "Generating HTML report..."
+        dt=$(date +%F-%H%M%S)
+        curl -s "$ZAP_API_URL/OTHER/core/other/htmlreport/?apikey=$ZAP_API_KEY" > report_$dt.html
+        echo "HTML report saved: report_$dt.html"
+artifacts:
+  files:
+    - "*.html"

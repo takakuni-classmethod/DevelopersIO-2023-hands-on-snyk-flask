@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    {% include "head.html" %}
+    <body>
+        <main>
+            {% include "navbar.html" %}
+            <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+                <div class="row align-items-center g-lg-5 py-5">
+                  <div class="col-lg-7 text-center text-lg-start">
+                    <h1 class="display-4 fw-bold lh-1 mb-3">A6: Security Misconfiguration</h1>
+                    <h2>Hello, you'll be {{ age }} years old next year!</h2>
+                    <p>Security misconfiguration is the most commonly seen issue. This is commonly a result of insecure default configurations, incomplete or ad hoc configurations, open cloud storage, misconfigured HTTP headers, and verbose error messages containing sensitive information. Not only must all operating systems, frameworks, libraries, and applications be securely configured, but they must be patched/upgraded in a timely fashion.</p>
+                </div>
+                
+                  <div class="col-md-10 mx-auto col-lg-5">
+                    <form class="p-4 p-md-5 border rounded-3 bg-light" action="/owasp/A6">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" name="age">
+                        <label for="floatingInput">Please Enter your current Age.</label>
+                      </div>
+                      <div class="checkbox mb-3">
+                      </div>
+                      <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                      <hr class="my-4">
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
+        
+            
+            
