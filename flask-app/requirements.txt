@@ -11,5 +11,5 @@ SQLAlchemy==2.0.5.post1
 typing_extensions==4.5.0
 Werkzeug==3.0.3
 WTForms==3.0.1
-zipp==3.15.0
+zipp==3.19.1
 wdb==3.3.0
